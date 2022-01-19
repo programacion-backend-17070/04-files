@@ -1,13 +1,22 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
-const filePath = path.join(__dirname, 'file.txt')
 console.log(__dirname)
+const filePath = path.join(__dirname, 'file.txt')
+
+// relativo ./
+// absoluto /
 console.time("read")
-const data = fs.readFileSync(filePath, 'utf8');
+try {
+  const data = fs.readFileSync(filePath, 'utf8')
+
+  fs.writeFileSync(filePath, "HOLA\n")
+  fs.appendFileSync(filePath, "NUEVA LINEA\n")
+  fs.unlinkSync(filePath)
+  // throw new Error("un error")
+} catch (e) {
+  console.log("ERROR")
+  console.log(e)
+}
+
 console.timeEnd("read")
-fs.writeFileSync(filePath, "HOLA")
-fs.appendFileSync(filePath, "nueva linea")
-fs.unlinkSync(filePath)
-
-
